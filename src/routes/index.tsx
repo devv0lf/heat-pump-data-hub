@@ -16,7 +16,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const REPO_URL = "https://github.com/";
+const REPO_URL = "https://github.com/devv0lf/heat-pump-data-hub/";
+const SCAN_PY_URL = "https://raw.githubusercontent.com/devv0lf/heat-pump-data-hub/refs/heads/main/midea_scan.py";
 const CATS: Category[] = ["Sterowanie", "Temperatury", "Praca", "Elektryka i ciśnienia", "Diagnostyka", "Inne"];
 
 function Panel({ n, title, children }: { n: string; title: string; children: ReactNode }) {
@@ -37,6 +38,30 @@ function Btn(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
       {...props}
       className={"border border-primary px-3 py-1 text-xs uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground disabled:opacity-40 " + (props.className ?? "")}
     />
+  );
+}
+
+function SaveBtn({ href, file, label }: { href: string; file: string; label: string }) {
+  const [busy, setBusy] = useState(false);
+  const save = async () => {
+    setBusy(true);
+    try {
+      const r = await fetch(href);
+      if (!r.ok) throw new Error(String(r.status));
+      const url = URL.createObjectURL(await r.blob());
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = file;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      window.open(href, "_blank", "noopener");
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <Btn onClick={save} disabled={busy}>{busy ? "> pobieranie..." : label}</Btn>
   );
 }
 
@@ -114,8 +139,8 @@ function Index() {
 
         <Panel n="01" title="SCAN_REGISTER // skrypt">
           <div className="flex flex-wrap gap-3">
-            <a href={REPO_URL} target="_blank" rel="noreferrer" className="border border-accent px-3 py-1 text-xs uppercase text-accent hover:bg-accent hover:text-accent-foreground">[ repozytorium ]</a>
-            <a href="/midea_scan.py" download className="border border-primary px-3 py-1 text-xs uppercase text-primary hover:bg-primary hover:text-primary-foreground">[ pobierz midea_scan.py ]</a>
+            <a href={REPO_URL} target="_blank" rel="noreferrer" className="border border-accent px-3 py-1 text-xs uppercase text-accent hover:bg-accent hover:text-accent-foreground">[ repozytorium heat-pump-data-hub ]</a>
+            <SaveBtn href={SCAN_PY_URL} file="midea_scan.py" label="[ pobierz midea_scan.py ]" />
           </div>
           <pre className="mt-3 overflow-auto border border-border bg-background p-3 text-xs">{`$ cd ~/Downloads
 $ python3 -m venv venv && source venv/bin/activate
