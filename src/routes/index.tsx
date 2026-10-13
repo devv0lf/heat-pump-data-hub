@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState, type ReactNode } from "react";
-import { buildLovelace, buildYaml, category, entityId, parseRegisters, type Category } from "@/lib/midea";
+import { buildLovelace, buildYaml, category, entityId, parseRegisters, type Category, type LovelaceStyle } from "@/lib/midea";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,7 +79,7 @@ function Index() {
   const [port, setPort] = useState("4196");
   const [slave, setSlave] = useState("1");
   const [unknown, setUnknown] = useState(false);
-  const [style, setStyle] = useState<"entities" | "tiles">("entities");
+  const [style, setStyle] = useState<LovelaceStyle>("entities");
   const [title, setTitle] = useState("Pompa ciepła Midea");
   const [picked, setPicked] = useState<Set<string>>(new Set());
 
@@ -162,8 +162,9 @@ $ python3 midea_scan.py --host ${host} --port ${port}
                 <div className="flex flex-wrap gap-2">
                   <Btn onClick={() => setPicked(new Set(usable.map(entityId)))}>[ wszystko ]</Btn>
                   <Btn onClick={() => setPicked(new Set())}>[ nic ]</Btn>
-                  <Btn onClick={() => setStyle("entities")} className={style === "entities" ? "bg-primary text-primary-foreground" : ""}>entities</Btn>
-                  <Btn onClick={() => setStyle("tiles")} className={style === "tiles" ? "bg-primary text-primary-foreground" : ""}>tiles</Btn>
+                  {(["entities", "tiles", "history", "gauges", "combo"] as const).map((s) => (
+                    <Btn key={s} onClick={() => setStyle(s)} className={style === s ? "bg-primary text-primary-foreground" : ""}>{s}</Btn>
+                  ))}
                 </div>
                 <Input label="tytuł karty" value={title} onChange={setTitle} />
                 <div className="max-h-[420px] space-y-3 overflow-auto pr-2">
