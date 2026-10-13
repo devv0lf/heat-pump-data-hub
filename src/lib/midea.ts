@@ -133,16 +133,63 @@ export function buildYaml(regs: Reg[], c: Conn, includeUnknown: boolean) {
   return L.join("\n").trimEnd() + "\n";
 }
 
-export function buildLovelace(regs: Reg[], style: "entities" | "tiles", title: string) {
-  if (!regs.length) return "# Zaznacz przynajmniej jeden parametr\n";
-  if (style === "entities") {
-    return [`type: entities`, `title: ${q(title)}`, "show_header_toggle: false", "entities:", ...regs.map((r) => `  - entity: ${entityId(r)}\n    name: ${q(r.name.replace(/^Midea /, ""))}`)].join("\n") + "\n";
+export type LovelaceStyle = "entities" | "tiles" | "history" | "gauges" | "combo";
+
+const nm = (r: Reg) => q(r.name.replace(/^Midea /, ""));
+
+function gaugeRange(r: Reg): [number, number] {
+  switch (r.unit) {
+    case "°C": return [-20, 70];
+    case "Hz": return [0, 120];
+    case "V": return [180, 260];
+    case "A": return [0, 30];
+    case "kPa": return [0, 4500];
+    case "rpm": return [0, 1000];
+    case "P": return [0, 500];
+    default: return [0, 100];
   }
-  return [
-    "type: grid",
-    "columns: 3",
-    "square: false",
-    "cards:",
-    ...regs.map((r) => `  - type: tile\n    entity: ${entityId(r)}\n    name: ${q(r.name.replace(/^Midea /, ""))}`),
-  ].join("\n") + "\n";
+}
+
+function card(regs: Reg[], style: Exclude<LovelaceStyle, "combo">, title: string, ind: string): string[] {
+  const I = (s: string) => ind + s;
+  if (style === "entities") {
+    return [I("type: entities"), I(`title: ${q(title)}`), I("show_header_toggle: false"), I("entities:"),
+      ...regs.flatMap((r) => [I(`  - entity: ${entityId(r)}`), I(`    name: ${nm(r)}`)])];
+  }
+  if (style === "tiles") {
+    return [I("type: grid"), I("columns: 3"), I("square: false"), I("cards:"),
+      ...regs.flatMap((r) => [I("  - type: tile"), I(`    entity: ${entityId(r)}`), I(`    name: ${nm(r)}`)])];
+  }
+  if (style === "history") {
+    return [I("type: history-graph"), I(`title: ${q(title + " – historia")}`), I("hours_to_show: 24"), I("entities:"),
+      ...regs.flatMap((r) => [I(`  - entity: ${entityId(r)}`), I(`    name: ${nm(r)}`)])];
+  }
+  return [I("type: grid"), I("columns: 3"), I("square: false"), I("cards:"),
+    ...regs.flatMap((r) => {
+      const [min, max] = gaugeRange(r);
+      return [I("  - type: gauge"), I(`    entity: ${entityId(r)}`), I(`    name: ${nm(r)}`), I(`    min: ${min}`), I(`    max: ${max}`), I("    needle: true")];
+    })];
+}
+
+export function buildLovelace(regs: Reg[], style: LovelaceStyle, title: string) {
+  if (!regs.length) return "# Zaznacz przynajmniej jeden parametr\n";
+  if (style !== "combo") return card(regs, style, title, "").join("\n") + "\n";
+  // combo: przełączniki jako kafelki, kluczowe wartości jako zegary, temperatury na wykresie, reszta w liście
+  const sw = regs.filter((r) => r.address === 7 || r.address === 8);
+  const temps = regs.filter((r) => r.unit === "°C");
+  const gauges = regs.filter((r) => ["Hz", "V", "A", "kPa"].includes(r.unit));
+  const rest = regs.filter((r) => !sw.includes(r) && !temps.includes(r) && !gauges.includes(r));
+  const L = ["type: vertical-stack", "cards:"];
+  const push = (rs: Reg[], s: Exclude<LovelaceStyle, "combo">, t: string) => {
+    if (!rs.length) return;
+    const c = card(rs, s, t, "    ");
+    c[0] = "  - " + (c[0] ?? "").trimStart();
+    L.push(...c);
+  };
+  push(sw, "tiles", title);
+  push(temps, "tiles", title);
+  push(temps, "history", title);
+  push(gauges, "gauges", title);
+  push(rest, "entities", title + " – diagnostyka");
+  return L.join("\n") + "\n";
 }
