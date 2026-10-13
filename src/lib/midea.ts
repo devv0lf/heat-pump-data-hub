@@ -13,7 +13,42 @@ export type Conn = { host: string; port: number; slave: number; name: string };
 export const SWITCH_ADDR = [7, 8];
 const SCALE_01 = [118]; // prąd sprężarki x0.1
 
+// Parser gotowego midea.yaml z HA — nazwy encji brane 1:1 z pola name:
+export function parseYaml(text: string): Reg[] {
+  const out: Reg[] = [];
+  let section = "";
+  let cur: Partial<Reg> & { name?: string } | null = null;
+  const flush = () => {
+    if (cur && cur.name && Number.isFinite(cur.address)) {
+      const isSw = section === "switches";
+      out.push({
+        kind: cur.kind ?? "holding",
+        address: isSw && !SWITCH_ADDR.includes(cur.address!) ? cur.address! : cur.address!,
+        raw: 1, signed: 1, name: cur.name, unit: cur.unit ?? "", unknown: false,
+      });
+    }
+    cur = null;
+  };
+  const val = (s: string) => s.replace(/\s+#.*$/, "").trim().replace(/^["']|["']$/g, "");
+  for (const line of text.split(/\r?\n/)) {
+    const top = line.match(/^([a-z_]+):\s*$/);
+    if (top) { flush(); section = top[1]!; continue; }
+    const item = line.match(/^\s*-\s+name:\s*(.+)$/);
+    if (item && (section === "sensors" || section === "switches")) { flush(); cur = { name: val(item[1]!) }; continue; }
+    if (!cur) continue;
+    const kv = line.match(/^\s{4}([a-z_]+):\s*(.+)$/);
+    if (!kv) continue;
+    const [, k, v] = kv;
+    if (k === "address") cur.address = Number(val(v!));
+    if (k === "input_type") cur.kind = val(v!) === "input" ? "input" : "holding";
+    if (k === "unit_of_measurement") { const u = val(v!); cur.unit = u === "obr/min" ? "rpm" : u; }
+  }
+  flush();
+  return out;
+}
+
 export function parseRegisters(text: string): Reg[] {
+  if (/^\s*sensors:\s*$/m.test(text) || /^\s*switches:\s*$/m.test(text)) return parseYaml(text);
   const out: Reg[] = [];
   const seen = new Set<string>();
   for (const line of text.split(/\r?\n/)) {
