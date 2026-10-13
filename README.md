@@ -1,30 +1,18 @@
-# Heat Pump Data Hub
+# Skaner Pompy Ciepła Midea (Waveshare RTU over TCP) -> Home Assistant
 
-- name: midea
-    type: rtuovertcp
-    host: 192.168.0.36
-    port: 4196
-    delay: 1
-    timeout: 5
-pod tymi danymi mam waveshare który pobiera dane z pompy ciepła. przygotuj pełen skrypt, który przeszuka rejestry pompy i wygeneruje z nim encje, które moge wstawić do HA. skrpyt musi generować plik txt, które wykaże wszystkie rejestry. poźniej niech ten skrypt otworzy ten txt i z niego wygenruje gotowy configuration.yaml do HA.
+Skrypt Python do automatycznego przeszukiwania rejestrów Modbus w pompie ciepła Midea (oraz zgodnych: Kaisai, Clivet, Pro Heat itp.) podłączonej przez konwerter **Waveshare** (w trybie RTU over TCP) oraz generowania gotowych encji do pliku `configuration.yaml` dla Home Assistant.
 
-This project was built with [Lovable](https://lovable.dev).
+---
 
-## Build with Lovable
+## 1. Wymagania wstępne
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/cae20049-d894-4ffc-a533-44448ecab33e).
+- Komputer w tej samej sieci lokalnej (LAN / Wi-Fi) co konwerter Waveshare.
+- Python 3.9 lub nowszy.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+### Przygotowanie środowiska (macOS / Linux):
 
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+```bash
+cd ~/Downloads
+python3 -m venv venv
+source venv/bin/activate
+pip install "pymodbus>=3.5"
