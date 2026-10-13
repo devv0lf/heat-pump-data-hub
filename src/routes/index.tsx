@@ -159,7 +159,7 @@ $ python3 midea_scan.py --host ${host} --port ${port}
           <textarea
             value={raw}
             onChange={(e) => setRaw(e.target.value)}
-            placeholder="# wklej tutaj zawartość midea_registers.txt&#10;holding;0;4;4;0.4;Midea Power On/Off (bity);"
+            placeholder="# wklej midea_registers.txt LUB swój gotowy midea.yaml z HA# wklej tutaj zawartość midea_registers.txt&#10;#10;holding;0;4;4;0.4;Midea Power On/Off (bity);"
             className="h-56 w-full resize-y border border-input bg-background p-3 text-xs text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
           />
           <div className="mt-2 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
