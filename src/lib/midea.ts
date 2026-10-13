@@ -183,7 +183,7 @@ export function buildLovelace(regs: Reg[], style: LovelaceStyle, title: string) 
   const push = (rs: Reg[], s: Exclude<LovelaceStyle, "combo">, t: string) => {
     if (!rs.length) return;
     const c = card(rs, s, t, "    ");
-    c[0] = "  - " + c[0].trimStart();
+    c[0] = "  - " + (c[0] ?? "").trimStart();
     L.push(...c);
   };
   push(sw, "tiles", title);
