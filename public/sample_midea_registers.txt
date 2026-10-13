@@ -1,0 +1,153 @@
+# Skan Midea 192.168.0.36:4196 slave=1 2026-10-13 08:21:04
+# typ;adres;raw;signed;x0.1;nazwa;jednostka
+holding;0;4;4;0.4;Midea Power On/Off (bity);
+holding;1;3;3;0.3;Midea Tryb pracy (1=auto 2=chłodz. 3=grzanie);
+holding;2;7708;7708;770.8;Midea Zadana temp wody strefa;°C
+holding;3;48;48;4.8;Midea Zadana temp powietrza;°C
+holding;4;45;45;4.5;Midea Zadana temp CWU T5s;°C
+holding;5;4096;4096;409.6;Midea Ustawienia funkcji (bity);
+holding;6;776;776;77.6;Midea Wybór krzywej grzewczej;
+holding;7;0;0;0.0;Midea Wymuszone grzanie CWU;
+holding;8;0;0;0.0;Midea Wymuszona grzałka TBH;
+holding;9;0;0;0.0;unknown_holding_9;
+holding;10;2;2;0.2;unknown_holding_10;
+holding;11;28;28;2.8;unknown_holding_11;
+holding;12;30;30;3.0;unknown_holding_12;
+holding;13;5;5;0.5;unknown_holding_13;
+holding;14;45;45;4.5;unknown_holding_14;
+holding;15;4096;4096;409.6;unknown_holding_15;
+holding;16;776;776;77.6;unknown_holding_16;
+holding;17;0;0;0.0;unknown_holding_17;
+holding;18;0;0;0.0;unknown_holding_18;
+holding;19;0;0;0.0;unknown_holding_19;
+holding;100;0;0;0.0;Midea Częstotliwość sprężarki;Hz
+holding;101;3;3;0.3;Midea Aktualny tryb pracy;
+holding;102;0;0;0.0;Midea Prędkość wentylatora;rpm
+holding;103;480;480;48.0;Midea Otwarcie zaworu EEV;P
+holding;104;43;43;4.3;Midea Temp wody wlot Tw_in;°C
+holding;105;46;46;4.6;Midea Temp wody wylot Tw_out;°C
+holding;106;5;5;0.5;Midea Temp wymiennika T3;°C
+holding;107;5;5;0.5;Midea Temp zewnętrzna T4;°C
+holding;108;21;21;2.1;Midea Temp tłoczenia Tp;°C
+holding;109;16;16;1.6;Midea Temp ssania Th;°C
+holding;110;43;43;4.3;Midea Temp T1 (wyjście wody całk.);°C
+holding;111;25;25;2.5;Midea Temp T1B;°C
+holding;112;32;32;3.2;Midea Temp czynnika ciecz T2;°C
+holding;113;38;38;3.8;Midea Temp czynnika gaz T2B;°C
+holding;114;25;25;2.5;Midea Temp pokojowa Ta;°C
+holding;115;45;45;4.5;Midea Temp zasobnika CWU T5;°C
+holding;116;950;950;95.0;Midea Ciśnienie wysokie;kPa
+holding;117;2100;2100;210.0;Midea Ciśnienie niskie;kPa
+holding;118;0;0;0.0;Midea Prąd jednostki zewn.;A
+holding;119;239;239;23.9;Midea Napięcie jednostki zewn.;V
+holding;120;255;255;25.5;Midea Temp bufora Tbt1;°C
+holding;121;255;255;25.5;Midea Temp bufora Tbt2;°C
+holding;122;5709;5709;570.9;Midea Czas pracy sprężarki;h
+holding;123;6;6;0.6;Midea Moc jednostki (kod);
+holding;124;0;0;0.0;Midea Aktualny błąd;
+holding;125;0;0;0.0;Midea Błąd historyczny 1;
+holding;126;0;0;0.0;Midea Błąd historyczny 2;
+holding;127;0;0;0.0;Midea Błąd historyczny 3;
+holding;128;1024;1024;102.4;Midea Status bity 1;
+holding;129;0;0;0.0;Midea Wyjścia obciążeń (bity);
+holding;130;99;99;9.9;unknown_holding_130;
+holding;131;34;34;3.4;unknown_holding_131;
+holding;132;0;0;0.0;unknown_holding_132;
+holding;133;0;0;0.0;unknown_holding_133;
+holding;134;33;33;3.3;Midea Wersja oprogramowania;
+holding;135;16;16;1.6;Midea Wersja sterownika;
+holding;136;26;26;2.6;Midea Docelowa częstotliwość sprężarki;Hz
+holding;137;255;255;25.5;Midea Prąd szyny DC;A
+holding;138;0;0;0.0;Midea Napięcie szyny DC;V
+holding;139;0;0;0.0;Midea Temp modułu falownika TF;°C
+holding;140;0;0;0.0;Midea Krzywa T1S strefa 1;°C
+holding;141;255;255;25.5;Midea Krzywa T1S strefa 2;°C
+holding;142;0;0;0.0;Midea Zużycie energii (hi);
+holding;143;0;0;0.0;Midea Zużycie energii (lo);kWh
+holding;144;5526;5526;552.6;Midea Moc pobierana;kW
+holding;145;0;0;0.0;Midea Moc wyjściowa (hi);
+holding;146;12609;12609;1260.9;Midea Moc wyjściowa (lo);
+holding;147;44;44;4.4;unknown_holding_147;
+holding;148;0;0;0.0;unknown_holding_148;
+holding;149;0;0;0.0;unknown_holding_149;
+holding;200;1826;1826;182.6;unknown_holding_200;
+holding;201;6425;6425;642.5;unknown_holding_201;
+holding;202;1285;1285;128.5;unknown_holding_202;
+holding;203;14135;14135;1413.5;unknown_holding_203;
+holding;204;6425;6425;642.5;unknown_holding_204;
+holding;205;60;60;6.0;unknown_holding_205;
+holding;206;34;34;3.4;unknown_holding_206;
+holding;207;60;60;6.0;unknown_holding_207;
+holding;208;20;20;2.0;unknown_holding_208;
+holding;209;5;5;0.5;unknown_holding_209;
+holding;210;49281;-16255;-1625.5;unknown_holding_210;
+holding;211;0;0;0.0;unknown_holding_211;
+holding;212;5;5;0.5;unknown_holding_212;
+holding;213;10;10;1.0;unknown_holding_213;
+holding;214;5;5;0.5;unknown_holding_214;
+holding;215;43;43;4.3;unknown_holding_215;
+holding;216;65511;-25;-2.5;unknown_holding_216;
+holding;217;30;30;3.0;unknown_holding_217;
+holding;218;5;5;0.5;unknown_holding_218;
+holding;219;5;5;0.5;unknown_holding_219;
+holding;220;65;65;6.5;unknown_holding_220;
+holding;221;210;210;21.0;unknown_holding_221;
+holding;222;15;15;1.5;unknown_holding_222;
+holding;223;5;5;0.5;unknown_holding_223;
+holding;224;5;5;0.5;unknown_holding_224;
+holding;225;2;2;0.2;unknown_holding_225;
+holding;226;52;52;5.2;unknown_holding_226;
+holding;227;10;10;1.0;unknown_holding_227;
+holding;228;5;5;0.5;unknown_holding_228;
+holding;229;3;3;0.3;unknown_holding_229;
+holding;230;2;2;0.2;unknown_holding_230;
+holding;231;25;25;2.5;unknown_holding_231;
+holding;232;65511;-25;-2.5;unknown_holding_232;
+holding;233;65531;-5;-0.5;unknown_holding_233;
+holding;234;5;5;0.5;unknown_holding_234;
+holding;235;30;30;3.0;unknown_holding_235;
+holding;236;52;52;5.2;unknown_holding_236;
+holding;237;65531;-5;-0.5;unknown_holding_237;
+holding;238;5;5;0.5;unknown_holding_238;
+holding;239;3;3;0.3;unknown_holding_239;
+holding;240;30;30;3.0;unknown_holding_240;
+holding;241;90;90;9.0;unknown_holding_241;
+holding;242;30;30;3.0;unknown_holding_242;
+holding;243;25;25;2.5;unknown_holding_243;
+holding;244;17;17;1.7;unknown_holding_244;
+holding;245;25;25;2.5;unknown_holding_245;
+holding;246;25;25;2.5;unknown_holding_246;
+holding;247;10;10;1.0;unknown_holding_247;
+holding;248;5;5;0.5;unknown_holding_248;
+holding;249;15;15;1.5;unknown_holding_249;
+holding;250;30;30;3.0;unknown_holding_250;
+holding;251;60;60;6.0;unknown_holding_251;
+holding;252;20;20;2.0;unknown_holding_252;
+holding;253;25;25;2.5;unknown_holding_253;
+holding;254;17;17;1.7;unknown_holding_254;
+holding;255;8;8;0.8;unknown_holding_255;
+holding;256;5;5;0.5;unknown_holding_256;
+holding;257;5;5;0.5;unknown_holding_257;
+holding;258;45;45;4.5;unknown_holding_258;
+holding;259;72;72;7.2;unknown_holding_259;
+holding;260;25;25;2.5;unknown_holding_260;
+holding;261;10;10;1.0;unknown_holding_261;
+holding;262;16;16;1.6;unknown_holding_262;
+holding;263;35;35;3.5;unknown_holding_263;
+holding;264;25;25;2.5;unknown_holding_264;
+holding;265;35;35;3.5;unknown_holding_265;
+holding;266;28;28;2.8;unknown_holding_266;
+holding;267;65531;-5;-0.5;unknown_holding_267;
+holding;268;7;7;0.7;unknown_holding_268;
+holding;269;0;0;0.0;unknown_holding_269;
+holding;270;257;257;25.7;unknown_holding_270;
+holding;271;4;4;0.4;unknown_holding_271;
+holding;272;34;34;3.4;unknown_holding_272;
+holding;273;35;35;3.5;unknown_holding_273;
+holding;274;25;25;2.5;unknown_holding_274;
+holding;275;35;35;3.5;unknown_holding_275;
+holding;276;28;28;2.8;unknown_holding_276;
+holding;277;65531;-5;-0.5;unknown_holding_277;
+holding;278;7;7;0.7;unknown_holding_278;
+holding;279;0;0;0.0;unknown_holding_279;
+holding;1000;0;0;0.0;unknown_holding_1000;
