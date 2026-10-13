@@ -21,7 +21,7 @@ export function parseRegisters(text: string): Reg[] {
     if (!l || l.startsWith("#")) continue;
     const p = l.split(";");
     if (p.length < 3) continue;
-    const kind = p[0].trim() === "input" ? "input" : "holding";
+    const kind = (p[0] ?? "").trim() === "input" ? "input" : "holding";
     const address = Number(p[1]);
     const raw = Number(p[2]);
     if (!Number.isFinite(address) || !Number.isFinite(raw)) continue;
@@ -46,7 +46,7 @@ const PL: Record<string, string> = { ą: "a", ć: "c", ę: "e", ł: "l", ń: "n"
 export function slug(s: string) {
   return s
     .toLowerCase()
-    .replace(/[ąćęłńóśźż]/g, (c) => PL[c])
+    .replace(/[ąćęłńóśźż]/g, (c) => PL[c] ?? c)
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "_")
